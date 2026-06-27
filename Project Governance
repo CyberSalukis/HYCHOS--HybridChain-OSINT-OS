@@ -1,133 +1,109 @@
-# Project Governance Under Draft Status with Construction 
-```
-Status: DRAFT · Version 0.1.0 · Last updated 2026-06-27 · License AGPL-3.0-or-later
-```
-This document describes how the **HybridChain-OSINT OS** project is governed: how
-decisions are made, how contributions are accepted, and how releases and security
-issues are handled.
+# Project Governance
+
+**Status:** DRAFT → ACTIVE · Version 1.0.0 · Last updated 2026-06-27  
+**License:** AGPL-3.0-or-later
+
+This document describes how the **HybridChain-OSINT OS** project is governed: how decisions are made, how contributions are accepted, releases and security issues are handled, and the policies that guide development.
 
 ## 1. Project Mission
 
-To provide a free, open, auditable platform for information verification and
-crowdsourced OSINT investigations, combining a private tamper-evident evidence chain
-with a public verification layer — operated ethically and lawfully.
+To provide a free, open, auditable platform for information verification and crowdsourced OSINT investigations, combining a private tamper-evident evidence chain with a public verification layer — operated ethically and lawfully.
+
+**Core Values**:
+- Integrity & Verifiability (cryptographic proof, chain-of-custody)
+- Privacy & Confidentiality (strong separation of public metadata vs. private evidence)
+- Collaboration & Fairness (reputation system, anti-abuse measures)
+- Security-First Development
+- Ethical Use (lawful OSINT, threat intelligence, human rights documentation)
+- Openness & Transparency
 
 ## 2. License and Openness
 
-The project is licensed under **AGPL-3.0-or-later**. All contributions are accepted
-under this license. The AGPL’s network-use clause means anyone offering a modified
-version over a network must make their source available; contributors and operators
-are expected to honor this.
+The project is licensed under **AGPL-3.0-or-later**. All contributions are accepted under this license. The AGPL’s network-use clause means anyone offering a modified version over a network must make their source available.
 
 ## 3. Roles
 
-```
-Role Description How appointed
-```
-```
-Maintainers Have merge rights; steward
-direction, releases, and secur‐
-ity.
-```
-```
-By existing maintainers, on
-sustained contribution
-```
-```
-Contributors Anyone submitting issues,
-PRs, or docs.
-```
-```
-Open to all
-```
-```
-Security team Subset of maintainers hand‐
-ling vulnerability reports.
-```
-```
-Appointed by maintainers
-```
-```
-Community moderators Manage conduct in com‐
-munity spaces.
-```
-```
-Appointed by maintainers
-```
-## Becoming a Maintainer
+| Role                  | Description                                      | How Appointed                          |
+|-----------------------|--------------------------------------------------|----------------------------------------|
+| Maintainers           | Merge rights; steward direction, releases, security | By existing maintainers on sustained contribution |
+| Contributors          | Submit issues, PRs, documentation                | Open to all                            |
+| Security Team         | Handle vulnerability reports                     | Subset appointed by maintainers        |
+| Community Moderators  | Manage conduct in discussions/issues             | Appointed by maintainers               |
 
-Sustained, high-quality contributions plus demonstrated good judgment. Nominated by
-an existing maintainer and approved by maintainer consensus (see §5).
+**Becoming a Maintainer**: Sustained high-quality contributions + demonstrated good judgment. Nominated by an existing maintainer and approved by consensus.
 
-## 4. Contribution Process
+## 4. Code of Conduct
 
-```
-Open an issue describing the bug/feature (for non-trivial changes).
-Fork and create a feature branch.
-```
-### 1. Placeholder
+All participants must follow the [Contributor Covenant Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/). 
 
+**Additional Project-Specific Rules**:
+- No weakening of cryptographic primitives or access controls.
+- Report security issues privately.
+- No tolerance for toxicity, discrimination, harassment, or misuse discussions (e.g., illegal surveillance).
+- Maintain professional, constructive communication.
 
+Violations may lead to warnings, temporary bans, or removal.
 
-```
-Follow CONTRIBUTING.md (../CONTRIBUTING.md): keep the core dependency-light,
-preserve verify_chain() integrity, follow PEP 8, and never commit sensitive
-data (data/, private keys).
-Add or update tests; ensure the full test suite passes.
-Open a pull request. At least one maintainer approval is required to merge;
-security-sensitive or consensus-critical changes require two.
-Maintainers may request changes or decline contributions that conflict with the
-mission, license, or policies.
-```
-## 5. Decision-Making
+## 5. Contribution Process
 
-```
-Lazy consensus for routine changes: if no maintainer objects within a
-reasonable review window, the change proceeds.
-Consensus-seeking for significant changes (architecture, cryptography,
-governance, license-adjacent matters): discussed openly; maintainers aim for
-agreement. If consensus cannot be reached, a simple majority of active
-maintainers decides; ties are resolved by the lead maintainer.
-All decisions must respect the Code of Conduct (CODE_OF_CONDUCT.md) and project
-policies.
-```
-## 6. Releases
+1. Open an issue (or discuss in GitHub Discussions) for significant features/bugs.
+2. Fork the repo and work on a feature branch (`feature/xxx` or `bugfix/yyy`).
+3. Follow `CONTRIBUTING.md` (if present) or these standards:
+   - Python 3.9+, type hints, Black + ruff formatting.
+   - Comprehensive tests and documentation.
+   - Preserve `verify_chain()` integrity and the hybrid model.
+   - Never commit sensitive data (keys, real evidence).
+4. Open a Pull Request. At least one maintainer review is required; security or architecture changes require two.
+5. Maintainers may request changes or close PRs that conflict with mission, security, or architecture.
 
-```
-Versioning follows Semantic Versioning (MAJOR.MINOR.PATCH). Current line:
-2.x.
-Release checklist: tests green, docs updated, changelog written, security review
-for crypto/auth/consensus changes.
-Security fixes are prioritized and may trigger out-of-band patch releases (see
-SECURITY.md (SECURITY.md)).
-```
-## 7. Security Governance
+**Welcome Contributions**: New verification modules, storage backends, UI/UX, documentation, security improvements, and test coverage.
 
-Vulnerability reports are handled privately by the security team per the
-Security Policy (SECURITY.md), including coordinated disclosure and advisories.
+## 6. Decision-Making
 
-## 8. Changes to Governance and Policies
+- **Routine changes**: Lazy consensus (no objections within a reasonable window).
+- **Significant changes** (architecture, crypto, governance, breaking changes): Open discussion → consensus-seeking. If needed, majority vote among active maintainers. Ties resolved by lead maintainer.
+- All decisions must respect the Code of Conduct and this governance document.
 
-Changes to this document or any policy in this directory require a pull request and
-maintainer consensus. Material changes are recorded in release notes and the policy
-version headers are updated.
+## 7. Releases
 
-## 9. Code of Conduct
+- **Versioning**: Semantic Versioning (`MAJOR.MINOR.PATCH`). Current line: 2.x.
+- **Release Checklist**:
+  - All tests pass (including hybrid & crowdsourcing suites).
+  - Documentation and changelog updated.
+  - Security review for changes affecting crypto, auth, or consensus.
+- Security fixes may trigger out-of-band patch releases.
 
-All participants must follow the Code of Conduct (CODE_OF_CONDUCT.md). Enforcement
-is the responsibility of maintainers and community moderators.
+## 8. Security Policy & Governance
 
-## 10. Contact
+Security is paramount.
 
-```
-General: [adaptanalysis@proton.me]
-Security: [adaptanalysis@proton.me]
+- **Responsible Disclosure**: Report vulnerabilities privately (see Contact below or GitHub Security Advisories). Do not disclose publicly until coordinated.
+- **Threat Model**: Assumes potentially compromised hosts; focus on tamper-evidence, auditability, and least privilege.
+- **Crypto Rules**: Use audited libraries only (`cryptography`). No custom crypto without rigorous review.
+- **Supported Versions**: Latest release + `main` branch.
+- Maintainers will issue advisories and patches as needed.
 
+A dedicated `SECURITY.md` may be added in the future for more details.
 
+## 9. Development Policies
 
-```
-Conduct: [adaptanalysis@proton.me]
-```
+- **Testing**: ≥85% coverage target for core blockchain modules. All PRs must include or update tests.
+- **CI/CD**: GitHub Actions for linting, testing, and basic security scans.
+- **Dependencies**: Keep core dependency-light. New deps require justification and security review.
+- **Code Quality**: Clear docstrings (especially for crypto and hybrid logic), consistent style, and backward compatibility where possible.
 
-### •
+## 10. Changes to Governance and Policies
 
+Changes to this document (or any policy file) require a Pull Request and maintainer consensus. Material changes will be noted in release notes and version headers.
+
+## 11. Contact
+
+- **General / Contributions**: Open an Issue or Discussion.
+- **Security / Vulnerabilities**: [adaptanalysis@proton.me] (preferred private channel).
+- **Conduct Issues**: Same security contact.
+
+---
+
+**This governance document is a living guide.** It will evolve with the project through community input and maintainer decisions.
+
+**Built with security, transparency, and collaboration in mind.**
