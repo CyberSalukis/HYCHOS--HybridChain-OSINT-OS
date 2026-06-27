@@ -187,7 +187,30 @@ hybridchain-server
 # - View community verifications
 # - Manage users (admin only)
 ```
+## 🐳 Docker Deployment (Recommended for Production)
 
+### Quick Start with Docker
+
+```bash
+cd osint_blockchain
+
+# Create .env file with strong secret
+echo "OSINT_JWT_SECRET=$(openssl rand -hex 32)" > .env
+
+# Build and run
+docker compose up --build -d
+Access: http://localhost:3000
+Initialize:
+Bashdocker compose exec hychos hybridchain-cli init-admin --username admin --password <strong-password>
+Stop:
+Bashdocker compose down
+Logs:
+Bashdocker compose logs -f
+Production Tips:
+
+Use a reverse proxy (Nginx / Traefik) with HTTPS.
+Backup the data/ volume regularly.
+Run behind a firewall.
 ---
 
 ## 👥 Roles & Permissions
