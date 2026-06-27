@@ -1,0 +1,134 @@
+# Project Governance under construction 
+
+```
+Status: DRAFT · Version 0.1.0 · Last updated 2026-06-27 · License AGPL-3.0-or-later
+```
+This document describes how the **HybridChain-OSINT OS** project is governed: how
+decisions are made, how contributions are accepted, and how releases and security
+issues are handled.
+
+## 1. Project Mission
+
+To provide a free, open, auditable platform for information verification and
+crowdsourced OSINT investigations, combining a private tamper-evident evidence chain
+with a public verification layer — operated ethically and lawfully.
+
+## 2. License and Openness
+
+The project is licensed under **AGPL-3.0-or-later**. All contributions are accepted
+under this license. The AGPL’s network-use clause means anyone offering a modified
+version over a network must make their source available; contributors and operators
+are expected to honor this.
+
+## 3. Roles
+
+```
+Role Description How appointed
+```
+```
+Maintainers Have merge rights; steward
+direction, releases, and secur‐
+ity.
+```
+```
+By existing maintainers, on
+sustained contribution
+```
+```
+Contributors Anyone submitting issues,
+PRs, or docs.
+```
+```
+Open to all
+```
+```
+Security team Subset of maintainers hand‐
+ling vulnerability reports.
+```
+```
+Appointed by maintainers
+```
+```
+Community moderators Manage conduct in com‐
+munity spaces.
+```
+```
+Appointed by maintainers
+```
+## Becoming a Maintainer
+
+Sustained, high-quality contributions plus demonstrated good judgment. Nominated by
+an existing maintainer and approved by maintainer consensus (see §5).
+
+## 4. Contribution Process
+
+```
+Open an issue describing the bug/feature (for non-trivial changes).
+Fork and create a feature branch.
+```
+### 1. Placeholder
+
+
+
+```
+Follow CONTRIBUTING.md (../CONTRIBUTING.md): keep the core dependency-light,
+preserve verify_chain() integrity, follow PEP 8, and never commit sensitive
+data (data/, private keys).
+Add or update tests; ensure the full test suite passes.
+Open a pull request. At least one maintainer approval is required to merge;
+security-sensitive or consensus-critical changes require two.
+Maintainers may request changes or decline contributions that conflict with the
+mission, license, or policies.
+```
+## 5. Decision-Making
+
+```
+Lazy consensus for routine changes: if no maintainer objects within a
+reasonable review window, the change proceeds.
+Consensus-seeking for significant changes (architecture, cryptography,
+governance, license-adjacent matters): discussed openly; maintainers aim for
+agreement. If consensus cannot be reached, a simple majority of active
+maintainers decides; ties are resolved by the lead maintainer.
+All decisions must respect the Code of Conduct (CODE_OF_CONDUCT.md) and project
+policies.
+```
+## 6. Releases
+
+```
+Versioning follows Semantic Versioning (MAJOR.MINOR.PATCH). Current line:
+2.x.
+Release checklist: tests green, docs updated, changelog written, security review
+for crypto/auth/consensus changes.
+Security fixes are prioritized and may trigger out-of-band patch releases (see
+SECURITY.md (SECURITY.md)).
+```
+## 7. Security Governance
+
+Vulnerability reports are handled privately by the security team per the
+Security Policy (SECURITY.md), including coordinated disclosure and advisories.
+
+## 8. Changes to Governance and Policies
+
+Changes to this document or any policy in this directory require a pull request and
+maintainer consensus. Material changes are recorded in release notes and the policy
+version headers are updated.
+
+## 9. Code of Conduct
+
+All participants must follow the Code of Conduct (CODE_OF_CONDUCT.md). Enforcement
+is the responsibility of maintainers and community moderators.
+
+## 10. Contact
+
+```
+General: [adaptanalysis@proton.me]
+Security: [adaptanalysis@proton.me]
+
+
+
+```
+Conduct: [adaptanalysis@proton.me]
+```
+
+### •
+
