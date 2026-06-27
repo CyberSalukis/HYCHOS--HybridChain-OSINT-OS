@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hybridchain-osint-os"
+version = "2.0.0"
+description = "HybridChain-OSINT OS: Hybrid blockchain platform for information verification and crowdsourced OSINT investigations"
+readme = "README.md"
+license = { text = "AGPL-3.0-or-later" }
+requires-python = ">=3.9"
+authors = [{ name = "HybridChain-OSINT OS Contributors" }]
+keywords = ["osint", "blockchain", "crowdsourcing", "verification", "intelligence", "hybrid-chain", "information-verification"]
+dependencies = [
+    "cryptography>=42.0.0",
+    "Flask>=3.0.0",
+    "flask-cors>=4.0.0",
+    "PyJWT>=2.8.0",
+    "jsonschema>=4.0.0",
+    "ntplib>=0.4.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0.0"]
+
+[project.scripts]
+hybridchain-cli = "osint_chain.cli.main:main"
+hybridchain-server = "osint_chain.api.app:main"
+# Legacy aliases for backward compatibility
+osint-cli = "osint_chain.cli.main:main"
+osint-server = "osint_chain.api.app:main"
+
+[tool.setuptools]
+packages = ["osint_chain", "osint_chain.core", "osint_chain.storage", "osint_chain.api", "osint_chain.cli", "osint_chain.schemas"]
+
+[tool.setuptools.package-data]
+"osint_chain.schemas" = ["*.json"]

@@ -1,0 +1,98 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://osint-chain/schemas/evidence_metadata.schema.json",
+  "title": "OSINT Evidence Metadata",
+  "description": "Standardised metadata recorded for every piece of evidence so that records remain consistent across investigators.",
+  "type": "object",
+  "required": ["case_id", "title", "source_type", "classification"],
+  "additionalProperties": true,
+  "properties": {
+    "case_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "description": "Identifier of the case/operation this evidence belongs to."
+    },
+    "operation_id": {
+      "type": "string",
+      "maxLength": 128,
+      "description": "Optional grouping id; evidence sharing an operation_id can be committed under one Merkle root."
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512,
+      "description": "Short human-readable description of the evidence."
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 8192
+    },
+    "source_type": {
+      "type": "string",
+      "enum": [
+        "social_media",
+        "website",
+        "document",
+        "image",
+        "video",
+        "audio",
+        "forum",
+        "messaging",
+        "dataset",
+        "screenshot",
+        "geospatial",
+        "other"
+      ],
+      "description": "Category of the OSINT source."
+    },
+    "source_url": {
+      "type": "string",
+      "maxLength": 2048,
+      "description": "Originating URL or location of the artifact (if applicable)."
+    },
+    "platform": {
+      "type": "string",
+      "maxLength": 128,
+      "description": "Platform name, e.g. twitter/x, telegram, facebook, reddit."
+    },
+    "author_handle": {
+      "type": "string",
+      "maxLength": 256,
+      "description": "Account/handle that authored the original content."
+    },
+    "captured_at": {
+      "type": "string",
+      "description": "When the artifact was originally captured/collected (ISO-8601)."
+    },
+    "classification": {
+      "type": "string",
+      "enum": ["UNCLASSIFIED", "OFFICIAL", "SENSITIVE", "CONFIDENTIAL", "SECRET"],
+      "description": "Handling classification for the evidence."
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string", "maxLength": 64 },
+      "maxItems": 64
+    },
+    "language": {
+      "type": "string",
+      "maxLength": 32,
+      "description": "ISO language code of the content, if known."
+    },
+    "geolocation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "lat": { "type": "number", "minimum": -90, "maximum": 90 },
+        "lon": { "type": "number", "minimum": -180, "maximum": 180 },
+        "place_name": { "type": "string", "maxLength": 256 }
+      }
+    },
+    "chain_of_custody_note": {
+      "type": "string",
+      "maxLength": 4096,
+      "description": "Free-text note about how the evidence was obtained/handled."
+    }
+  }
+}

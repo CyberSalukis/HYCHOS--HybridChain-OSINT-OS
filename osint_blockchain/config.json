@@ -1,0 +1,16 @@
+{
+  "data_dir": "data",
+  "evidence_dir": "data/evidence",
+  "chain_file": "data/chain/chain.jsonl",
+  "users_file": "data/users.json",
+  "keys_dir": "data/keys",
+  "ntp_servers": ["pool.ntp.org", "time.google.com", "time.cloudflare.com"],
+  "ntp_timeout": 3,
+  "ntp_enabled": true,
+  "timestamp_authority": "pool.ntp.org",
+  "max_upload_mb": 200,
+  "jwt_secret": "CHANGE_ME_IN_PRODUCTION_USE_ENV_OSINT_JWT_SECRET",
+  "jwt_expiry_hours": 12,
+  "host": "0.0.0.0",
+  "port": 3000
+}

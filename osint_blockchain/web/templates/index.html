@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OSINT Evidence Blockchain</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <!-- Login view -->
+  <div id="login-view" class="login-wrap">
+    <form id="login-form" class="login-card">
+      <h1>🔗 OSINT Evidence Chain</h1>
+      <p class="subtitle">Immutable chain of custody for OSINT investigations</p>
+      <label>Username<input type="text" id="login-username" autocomplete="username" required /></label>
+      <label>Password<input type="password" id="login-password" autocomplete="current-password" required /></label>
+      <button type="submit">Sign in</button>
+      <div id="login-error" class="error"></div>
+    </form>
+  </div>
+
+  <!-- App shell -->
+  <div id="app-view" class="hidden">
+    <header class="topbar">
+      <div class="brand">🔗 OSINT Evidence Chain</div>
+      <nav class="tabs">
+        <button data-tab="submit" class="tab">Submit</button>
+        <button data-tab="browse" class="tab active">Browse</button>
+        <button data-tab="verify" class="tab">Verify</button>
+        <button data-tab="audit" class="tab">Audit Log</button>
+        <button data-tab="users" class="tab admin-only">Users</button>
+      </nav>
+      <div class="userbox">
+        <span id="who"></span>
+        <span id="role-badge" class="badge"></span>
+        <button id="logout" class="link">Logout</button>
+      </div>
+    </header>
+
+    <main>
+      <!-- Submit -->
+      <section id="tab-submit" class="tab-panel hidden">
+        <h2>Submit Evidence</h2>
+        <form id="evidence-form" class="card form-grid">
+          <label>Case ID *<input name="case_id" required placeholder="CASE-2026-001" /></label>
+          <label>Operation ID<input name="operation_id" placeholder="optional grouping" /></label>
+          <label class="full">Title *<input name="title" required placeholder="Screenshot of suspect profile" /></label>
+          <label>Source type *
+            <select name="source_type" required>
+              <option value="social_media">social_media</option>
+              <option value="website">website</option>
+              <option value="document">document</option>
+              <option value="image">image</option>
+              <option value="video">video</option>
+              <option value="audio">audio</option>
+              <option value="forum">forum</option>
+              <option value="messaging">messaging</option>
+              <option value="dataset">dataset</option>
+              <option value="screenshot">screenshot</option>
+              <option value="geospatial">geospatial</option>
+              <option value="other">other</option>
+            </select>
+          </label>
+          <label>Classification *
+            <select name="classification" required>
+              <option>UNCLASSIFIED</option>
+              <option>OFFICIAL</option>
+              <option>SENSITIVE</option>
+              <option>CONFIDENTIAL</option>
+              <option>SECRET</option>
+            </select>
+          </label>
+          <label>Platform<input name="platform" placeholder="twitter/x, telegram..." /></label>
+          <label>Author handle<input name="author_handle" placeholder="@suspect" /></label>
+          <label class="full">Source URL<input name="source_url" placeholder="https://..." /></label>
+          <label class="full">Description<textarea name="description" rows="2"></textarea></label>
+          <label class="full">Tags (comma separated)<input name="tags" placeholder="propaganda, recruitment" /></label>
+          <label class="full">Chain of custody note<textarea name="chain_of_custody_note" rows="2"></textarea></label>
+          <label class="full">Evidence files *<input type="file" name="files" multiple required /></label>
+          <button type="submit">Commit to chain</button>
+          <div id="submit-result" class="result"></div>
+        </form>
+      </section>
+
+      <!-- Browse -->
+      <section id="tab-browse" class="tab-panel">
+        <h2>Browse &amp; Search Evidence</h2>
+        <div class="card filters">
+          <input id="f-case" placeholder="Case ID" />
+          <input id="f-q" placeholder="Search text..." />
+          <select id="f-source">
+            <option value="">any source</option>
+            <option>social_media</option><option>website</option><option>document</option>
+            <option>image</option><option>video</option><option>screenshot</option><option>other</option>
+          </select>
+          <button id="search-btn">Search</button>
+          <button id="refresh-btn" class="secondary">Refresh</button>
+        </div>
+        <div id="evidence-list" class="list"></div>
+      </section>
+
+      <!-- Verify -->
+      <section id="tab-verify" class="tab-panel hidden">
+        <h2>Chain Verification</h2>
+        <div class="card">
+          <button id="verify-btn">Verify entire chain</button>
+          <div id="verify-result" class="result"></div>
+        </div>
+        <div class="card">
+          <h3>Verify a stored file</h3>
+          <input id="verify-hash" placeholder="file SHA-256 hash" style="width:60%" />
+          <button id="verify-file-btn">Check integrity</button>
+          <div id="verify-file-result" class="result"></div>
+        </div>
+      </section>
+
+      <!-- Audit -->
+      <section id="tab-audit" class="tab-panel hidden">
+        <h2>Access &amp; Audit Log</h2>
+        <div class="card filters">
+          <input id="audit-target" placeholder="filter by target block id (optional)" style="width:50%" />
+          <button id="audit-btn">Load audit log</button>
+        </div>
+        <div id="audit-list" class="list"></div>
+      </section>
+
+      <!-- Users -->
+      <section id="tab-users" class="tab-panel hidden">
+        <h2>User Management</h2>
+        <form id="user-form" class="card form-grid">
+          <label>Username *<input name="username" required /></label>
+          <label>Password *<input name="password" type="password" required /></label>
+          <label>Full name<input name="full_name" /></label>
+          <label>Role *
+            <select name="role">
+              <option value="investigator">investigator</option>
+              <option value="viewer">viewer</option>
+              <option value="admin">admin</option>
+            </select>
+          </label>
+          <label class="full">Cases (comma separated)<input name="cases" placeholder="CASE-1, CASE-2" /></label>
+          <button type="submit">Create user</button>
+          <div id="user-result" class="result"></div>
+        </form>
+        <div id="user-list" class="list"></div>
+      </section>
+    </main>
+
+    <!-- Detail modal -->
+    <div id="modal" class="modal hidden">
+      <div class="modal-body">
+        <button id="modal-close" class="modal-close">&times;</button>
+        <div id="modal-content"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
