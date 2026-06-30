@@ -29,7 +29,7 @@ hybridchain-cli verify
 TOKEN=$(curl -s -X POST localhost:3000/api/auth/login \
   -H 'Content-Type: application/json' \
   -d '{"username":"alice","password":"pw"}' | jq -r .token)
-TOKEN_HEADER="Authorization: ******"
+TOKEN_HEADER=$(printf 'Authorization: ******' "$TOKEN")
 
 curl -s -X POST "localhost:3000/api/evidence/<PARENT_BLOCK_ID>/derived" \
   -H "$TOKEN_HEADER" \
@@ -55,10 +55,10 @@ INVESTIGATOR_TOKEN=<investigator-jwt>
 CONTRIBUTOR_TOKEN=<contributor-jwt>
 ANALYST_TOKEN=<analyst-jwt>
 ADMIN_TOKEN=<admin-jwt>
-INVESTIGATOR_HEADER="Authorization: ******"
-CONTRIBUTOR_HEADER="Authorization: ******"
-ANALYST_HEADER="Authorization: ******"
-ADMIN_HEADER="Authorization: ******"
+INVESTIGATOR_HEADER=$(printf 'Authorization: ******' "$INVESTIGATOR_TOKEN")
+CONTRIBUTOR_HEADER=$(printf 'Authorization: ******' "$CONTRIBUTOR_TOKEN")
+ANALYST_HEADER=$(printf 'Authorization: ******' "$ANALYST_TOKEN")
+ADMIN_HEADER=$(printf 'Authorization: ******' "$ADMIN_TOKEN")
 ```
 
 Create task:
