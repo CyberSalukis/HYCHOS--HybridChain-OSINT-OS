@@ -3,6 +3,7 @@
 HybridChain-OSINT OS is an open-source platform for managing OSINT evidence with tamper-evident records, role-based access control, and a hybrid model for private investigations plus public verification workflows.
 
 ## Overview
+_Updated: 2026-06-30_
 
 This repository packages a Python-based evidence platform built for teams that need:
 
@@ -14,6 +15,7 @@ This repository packages a Python-based evidence platform built for teams that n
 The implementation centers on a private evidence chain today, with hybrid-chain and crowdsourcing components included as part of the broader platform architecture.
 
 ## Why the platform is hybrid
+_Updated: 2026-06-30_
 
 HybridChain-OSINT OS separates two concerns:
 
@@ -23,6 +25,7 @@ HybridChain-OSINT OS separates two concerns:
 This structure is designed to let investigators preserve confidentiality while still supporting community-driven verification patterns where appropriate.
 
 ## Core capabilities
+_Updated: 2026-06-30_
 
 - **Evidence integrity** with SHA-256 hashing and signed blocks
 - **Chain of custody** through append-only blockchain records
@@ -32,6 +35,7 @@ This structure is designed to let investigators preserve confidentiality while s
 - **Extensible architecture** for hybrid-chain, collection-task, and crowdsourcing features
 
 ## Repository structure
+_Updated: 2026-06-30_
 
 ```text
 HYCHOS--HybridChain-OSINT-OS/
@@ -54,8 +58,10 @@ HYCHOS--HybridChain-OSINT-OS/
 ```
 
 ## Getting started
+_Updated: 2026-06-30_
 
 ### 1. Install
+_Updated: 2026-06-30_
 
 ```bash
 git clone https://github.com/CyberSalukis/HYCHOS--HybridChain-OSINT-OS.git
@@ -67,12 +73,14 @@ pip install -e .
 ```
 
 ### 2. Initialize an administrator
+_Updated: 2026-06-30_
 
 ```bash
 hybridchain-cli init-admin --username admin --password <strong-password>
 ```
 
 ### 3. Start the platform
+_Updated: 2026-06-30_
 
 ```bash
 hybridchain-server
@@ -81,6 +89,7 @@ hybridchain-server
 The default web interface is available at `http://localhost:3000`.
 
 ## Documentation
+_Updated: 2026-06-30_
 
 - [Package README](./osint_blockchain/README.md)
 - [API reference](./osint_blockchain/docs/API.md)
@@ -90,6 +99,7 @@ The default web interface is available at `http://localhost:3000`.
 - [Troubleshooting guide](./TroubleshootingGuide)
 
 ## Quality and validation
+_Updated: 2026-06-30_
 
 From the repository root, the existing project validation uses:
 
@@ -100,6 +110,7 @@ pytest osint_blockchain/tests
 ```
 
 ## Governance and security
+_Updated: 2026-06-30_
 
 - [Project governance](./Project%20Governance)
 - [Security policy](./Security%20Policy)
@@ -108,5 +119,6 @@ pytest osint_blockchain/tests
 Please do not report vulnerabilities in public issues. Follow the process in the security policy instead.
 
 ## License
+_Updated: 2026-06-30_
 
 This project is licensed under the [GNU Affero General Public License v3.0-or-later](./LICENSE).
