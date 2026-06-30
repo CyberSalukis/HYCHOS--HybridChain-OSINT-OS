@@ -29,9 +29,10 @@ hybridchain-cli verify
 TOKEN=$(curl -s -X POST localhost:3000/api/auth/login \
   -H 'Content-Type: application/json' \
   -d '{"username":"alice","password":"pw"}' | jq -r .token)
+TOKEN_HEADER="Authorization: ******"
 
 curl -s -X POST "localhost:3000/api/evidence/<PARENT_BLOCK_ID>/derived" \
-  -H "Authorization: ******" \
+  -H "$TOKEN_HEADER" \
   -F 'derivation_type=ocr' \
   -F 'tool=tesseract' \
   -F 'parent_file_hash=<ORIGINAL_FILE_HASH>' \
@@ -49,11 +50,22 @@ hybridchain-cli audit --target <BLOCK_ID>
 
 ## 4) Crowdsourced collection (hybrid layer)
 
+```bash
+INVESTIGATOR_TOKEN=<investigator-jwt>
+CONTRIBUTOR_TOKEN=<contributor-jwt>
+ANALYST_TOKEN=<analyst-jwt>
+ADMIN_TOKEN=<admin-jwt>
+INVESTIGATOR_HEADER="Authorization: ******"
+CONTRIBUTOR_HEADER="Authorization: ******"
+ANALYST_HEADER="Authorization: ******"
+ADMIN_HEADER="Authorization: ******"
+```
+
 Create task:
 
 ```bash
 curl -s -X POST localhost:3000/api/tasks \
-  -H "Authorization: ******" \
+  -H "$INVESTIGATOR_HEADER" \
   -H 'Content-Type: application/json' \
   -d '{
     "title": "Collect phishing screenshots impersonating Bank XYZ",
@@ -69,7 +81,7 @@ Submit contribution:
 
 ```bash
 curl -s -X POST localhost:3000/api/crowdsource/submit \
-  -H "Authorization: ******" \
+  -H "$CONTRIBUTOR_HEADER" \
   -F "task_id=task-123" \
   -F 'metadata={"source":"email","description":"Phishing email received"}' \
   -F "files[]=@phishing_screenshot.png"
@@ -79,7 +91,7 @@ Vote on submission:
 
 ```bash
 curl -s -X POST localhost:3000/api/crowdsource/submissions/sub-456/vote \
-  -H "Authorization: ******" \
+  -H "$ANALYST_HEADER" \
   -H 'Content-Type: application/json' \
   -d '{"vote": "authentic", "comment": "Matches known campaign template"}'
 ```
@@ -88,7 +100,7 @@ Promote accepted submission to private chain:
 
 ```bash
 curl -s -X POST localhost:3000/api/evidence/import-from-crowdsource \
-  -H "Authorization: ******" \
+  -H "$ADMIN_HEADER" \
   -H 'Content-Type: application/json' \
   -d '{"submission_id": "sub-456"}'
 ```

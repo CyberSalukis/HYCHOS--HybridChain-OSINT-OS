@@ -15,7 +15,7 @@ HybridChain-OSINT-OS is a blockchain-backed platform for evidence integrity, cha
 - Cryptography module: [`osint_blockchain/docs/CRYPTOGRAPHY.md`](osint_blockchain/docs/CRYPTOGRAPHY.md)
 - API docs: [`osint_blockchain/docs/API.md`](osint_blockchain/docs/API.md)
 - Configuration: [`osint_blockchain/docs/CONFIGURATION.md`](osint_blockchain/docs/CONFIGURATION.md)
-- Usage examples: [`osint_blockchain/docs/USAGE_EXAMPLES.md`](osint_blockchain/docs/USAGE_EXAMPLES.md)
+- Usage examples: [`docs/USAGE_EXAMPLES.md`](docs/USAGE_EXAMPLES.md)
 
 ## Quality Checks
 

@@ -1,6 +1,11 @@
-Dockerfile (Multi-stage, Production-Ready)
-File Path: osint_blockchain/Dockerfile
-dockerfile# ========================================
+# Docker Deployment Reference
+
+Reference deployment artifacts for the HYCHOS application package.
+
+## Dockerfile (`osint_blockchain/Dockerfile`)
+
+```dockerfile
+# ========================================
 # HYCHOS - HybridChain-OSINT OS
 # Production Multi-Stage Dockerfile
 # ========================================
@@ -78,9 +83,12 @@ CMD ["gunicorn", "--bind", "0.0.0.0:3000", \
      "--timeout", "120", \
      "--access-logfile", "-", \
      "osint_chain.api.app:create_app()"]
-2. docker-compose.yml
-File Path: osint_blockchain/docker-compose.yml
-YAMLversion: '3.8'
+```
+
+## docker-compose (`osint_blockchain/docker-compose.yml`)
+
+```yaml
+version: '3.8'
 
 services:
   hychos:
@@ -110,3 +118,4 @@ services:
 
 volumes:
   hychos_data:
+```
