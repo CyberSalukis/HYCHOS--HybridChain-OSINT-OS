@@ -5,8 +5,7 @@ collection, verification, and chain-of-custody workflows.
 
 ## Repository layout
 
-- `/home/runner/work/HYCHOS--HybridChain-OSINT-OS/HYCHOS--HybridChain-OSINT-OS/osint_blockchain`
-  contains the installable package and runtime code.
+- `osint_blockchain/` contains the installable package and runtime code.
 - `osint_blockchain/osint_chain/core` includes blockchain, cryptography,
   Merkle tree, and validation logic.
 - `osint_blockchain/osint_chain/api` contains the Flask API server.
@@ -17,7 +16,7 @@ collection, verification, and chain-of-custody workflows.
 ## Quick start
 
 ```bash
-cd /home/runner/work/HYCHOS--HybridChain-OSINT-OS/HYCHOS--HybridChain-OSINT-OS/osint_blockchain
+cd osint_blockchain
 python -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
