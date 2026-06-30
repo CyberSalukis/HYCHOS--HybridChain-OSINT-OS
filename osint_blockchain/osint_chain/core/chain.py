@@ -245,7 +245,7 @@ class Blockchain:
     # ------------------------------------------------------------------ #
     # Integrity verification
     # ------------------------------------------------------------------ #
-    def verify_chain(self, known_pubkeys: Optional[Dict[str, str]] = None) -> dict:
+    def verify_chain(self, known_pubkeys: Optional[Dict[str, str]] = None) -> dict:  # noqa: C901
         """Full chain integrity check.
 
         Returns a report dict with overall validity and per-block issues.

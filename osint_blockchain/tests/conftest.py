@@ -1,7 +1,5 @@
 """Shared pytest fixtures: an isolated service backed by a temp directory."""
 import io
-import os
-
 import pytest
 
 from osint_chain.config import Config
@@ -17,7 +15,7 @@ def cfg(tmp_path):
         "users_file": str(tmp_path / "users.json"),
         "keys_dir": str(tmp_path / "keys"),
         "ntp_enabled": False,  # offline tests use local clock
-        "jwt_secret": "test-secret",
+        "jwt_secret": "test-secret-key-for-pytest-suite-32b",
     }
     # Bypass file/env layering by injecting directly
     c = Config.__new__(Config)

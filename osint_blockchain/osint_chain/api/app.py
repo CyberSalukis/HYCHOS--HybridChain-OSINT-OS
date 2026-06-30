@@ -5,7 +5,6 @@ or via the console entry point:  osint-server
 """
 from __future__ import annotations
 
-import io
 import os
 from pathlib import Path
 
@@ -13,7 +12,6 @@ from flask import Flask, g, jsonify, request, send_file, send_from_directory
 from flask_cors import CORS
 
 from ..config import get_config
-from ..core import block as block_mod
 from ..core.validation import MetadataValidationError, get_schema
 from ..service import EvidenceService
 from .auth import issue_token, login_required, require_permission
@@ -22,7 +20,7 @@ from .users import UserError, UserManager
 WEB_DIR = Path(__file__).resolve().parent.parent.parent / "web"
 
 
-def create_app(config=None) -> Flask:
+def create_app(config=None) -> Flask:  # noqa: C901
     cfg = config or get_config()
     cfg.ensure_dirs()
 

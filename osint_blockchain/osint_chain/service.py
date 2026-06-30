@@ -6,10 +6,9 @@ API and the CLI. Keeping the orchestration here avoids duplicating logic.
 """
 from __future__ import annotations
 
-from typing import BinaryIO, Dict, List, Optional
+from typing import Dict, List, Optional
 
 from .config import get_config
-from .core import block as block_mod
 from .core.chain import Blockchain
 from .core.timesource import TimeSource
 from .core.validation import validate_evidence_metadata

@@ -1,5 +1,4 @@
 """End-to-end chain behaviour: ingestion, versioning, audit, tamper detection."""
-import io
 import json
 
 import pytest
@@ -64,7 +63,7 @@ def test_access_logging(service):
     service.log_access(user, "export", blk["block_id"], {"file_hash": "x"})
     logs = service.chain.access_blocks(blk["block_id"])
     assert len(logs) == 2
-    assert {l.payload["action"] for l in logs} == {"view", "export"}
+    assert {log.payload["action"] for log in logs} == {"view", "export"}
 
 
 def test_tamper_detection_in_memory(service):
@@ -80,7 +79,7 @@ def test_tamper_detection_in_memory(service):
 
 def test_tamper_detection_on_reload(service, cfg):
     user = service.users.users[service._admin["id"]]
-    blk = service.submit_evidence(user, _meta(), [make_file(b"data")])
+    service.submit_evidence(user, _meta(), [make_file(b"data")])
     # Corrupt the persisted JSONL directly
     path = service.chain.chain_file
     lines = path.read_text().splitlines()

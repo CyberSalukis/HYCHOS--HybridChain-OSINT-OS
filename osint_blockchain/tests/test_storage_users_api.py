@@ -8,7 +8,6 @@ import pytest
 
 from osint_chain.api.users import UserManager
 from osint_chain.storage.filesystem import ImmutableFileStore
-from tests.conftest import make_file
 
 
 # --------------------------- storage --------------------------- #
