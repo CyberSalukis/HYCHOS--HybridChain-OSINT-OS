@@ -6,9 +6,9 @@ Practical workflow examples for HYCHOS (`hybridchain-cli` and REST API).
 
 ```bash
 hybridchain-cli init-admin --username admin --password 'change-me'
-hybridchain-cli create-user --username alice --password pw --role investigator --case CASE-2026-001
-hybridchain-cli create-user --username bob --password pw --role investigator --case CASE-2026-001
-hybridchain-cli create-user --username val --password pw --role viewer
+hybridchain-cli create-user --username alice --password <password> --role investigator --case CASE-2026-001
+hybridchain-cli create-user --username bob --password <password> --role investigator --case CASE-2026-001
+hybridchain-cli create-user --username val --password <password> --role viewer
 ```
 
 ## 1) Add evidence and verify chain integrity
@@ -28,8 +28,8 @@ hybridchain-cli verify
 ```bash
 TOKEN=$(curl -s -X POST localhost:3000/api/auth/login \
   -H 'Content-Type: application/json' \
-  -d '{"username":"alice","password":"pw"}' | jq -r .token)
-TOKEN_HEADER=$(printf 'Authorization: ******' "$TOKEN")
+  -d '{"username":"alice","password":"<password>"}' | jq -r .token)
+TOKEN_HEADER="Authorization: ******"
 
 curl -s -X POST "localhost:3000/api/evidence/<PARENT_BLOCK_ID>/derived" \
   -H "$TOKEN_HEADER" \
@@ -55,10 +55,10 @@ INVESTIGATOR_TOKEN=<investigator-jwt>
 CONTRIBUTOR_TOKEN=<contributor-jwt>
 ANALYST_TOKEN=<analyst-jwt>
 ADMIN_TOKEN=<admin-jwt>
-INVESTIGATOR_HEADER=$(printf 'Authorization: ******' "$INVESTIGATOR_TOKEN")
-CONTRIBUTOR_HEADER=$(printf 'Authorization: ******' "$CONTRIBUTOR_TOKEN")
-ANALYST_HEADER=$(printf 'Authorization: ******' "$ANALYST_TOKEN")
-ADMIN_HEADER=$(printf 'Authorization: ******' "$ADMIN_TOKEN")
+INVESTIGATOR_HEADER="Authorization: ******"
+CONTRIBUTOR_HEADER="Authorization: ******"
+ANALYST_HEADER="Authorization: ******"
+ADMIN_HEADER="Authorization: ******"
 ```
 
 Create task:
