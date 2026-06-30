@@ -1,0 +1,5 @@
+[console_scripts]
+hybridchain-cli = osint_chain.cli.main:main
+hybridchain-server = osint_chain.api.app:main
+osint-cli = osint_chain.cli.main:main
+osint-server = osint_chain.api.app:main
