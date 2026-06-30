@@ -1,105 +1,96 @@
 # HYCHOS Troubleshooting Guide
 
-**HybridChain-OSINT OS** – Troubleshooting common issues with installation, running, and deployment.
+Common fixes for installation, startup, API, and deployment issues.
 
-## 1. Installation & Setup Issues
+## 1) Installation and setup
 
-### `pip install -e .` fails or "No module named osint_chain"
+### `pip install -e .` fails or `No module named osint_chain`
 
-**Solution**:
 ```bash
-# Make sure you are in the correct directory
 cd osint_blockchain
-
-# Clean previous attempts
 rm -rf build/ dist/ *.egg-info/ __pycache__/
-
-# Try installing with the modern pyproject.toml
 python -m pip install -e .
+python -c "import osint_chain; print(osint_chain.__file__)"
+```
 
-# Fallback using setup.py (if added)
-python -m pip install -e .
-Verify Installation:
-Bashpython -c "import osint_chain; print(osint_chain.__file__)"
-Missing dependencies or version conflicts
-Bashpip install -r requirements.txt --upgrade
-pip install -e ".[dev]"          # for testing
-Key packages: cryptography, Flask, flask-cors, PyJWT, jsonschema, ntplib.
-Permission errors on data directory
-Bashmkdir -p data/keys data/evidence
+### Dependency conflicts
+
+```bash
+pip install -r requirements.txt --upgrade
+pip install -e ".[dev]"
+```
+
+### Data directory permission errors
+
+```bash
+mkdir -p data/keys data/evidence
 chmod 700 data/keys
-chown -R $USER data/
+chown -R "$USER" data/
+```
 
-2. Running the Application
+## 2) Running the application
 
-CLI commands not found (hybridchain-cli / hybridchain-server)
-Ensure the package is installed in editable mode and your virtual environment is activated.
-Bash# After successful pip install -e .
-hybridchain-cli init-admin --username admin --password StrongPass123!
+### CLI commands not found
+
+Ensure your virtual environment is active, then reinstall editable package:
+
+```bash
+python -m pip install -e .
+hybridchain-cli init-admin --username admin --password '<strong-password>'
 hybridchain-server
-Legacy aliases (osint-cli, osint-server) are also available.
-Flask / Server startup errors
-Bashexport OSINT_JWT_SECRET="your-very-long-random-secret-key-here"
-export FLASK_ENV=development   # optional for dev
+```
+
+### Server fails to start
+
+```bash
+export OSINT_JWT_SECRET="<long-random-secret>"
+export FLASK_ENV=development  # optional
 hybridchain-server
-Default port: 3000. Access the web UI at http://localhost:3000
-Database / Chain initialization issues
-Run the admin initialization first:
-Bashhybridchain-cli init-admin --username admin --password <secure_password>
-The system automatically creates a genesis block on first use.
+```
 
-3. Docker Deployment Issues
+Default URL: `http://localhost:3000`
 
-If using the provided Dockerfile / docker-compose.yml:
-Bashdocker compose up --build
-Common fixes:
+## 3) Docker issues
 
-Create a .env file with OSINT_JWT_SECRET=...
-Persistent data lives in ./data on the host.
-View logs: docker compose logs -f hychos
+```bash
+docker compose up --build
+```
 
-4. Chain & Verification Problems
+If startup fails:
+- Set `OSINT_JWT_SECRET` in `.env`
+- Check logs: `docker compose logs -f hychos`
+- Verify persistent volume and write permissions for `/data`
 
-Chain verification fails
-Bashhybridchain-cli verify
-# or via API
+## 4) Chain verification issues
+
+```bash
+hybridchain-cli verify
 curl http://localhost:3000/api/chain/verify
-Possible causes:
+```
 
-Manual edits to data/chain.jsonl or data/public_chain.jsonl
-File permission or storage issues
-Clock skew (ensure NTP is working)
+Common causes:
+- Manual edits to `data/chain.jsonl` or `data/public_chain.jsonl`
+- Storage permission problems
+- Clock skew / NTP mismatch
 
-Public / Hybrid layer issues
+## 5) API and web UI issues
 
-Ensure private blocks are properly mirrored to the public layer.
-Check cross-chain links via the admin interface or API endpoints.
+- Missing static assets: verify `web/static/` and `web/templates/` exist
+- Auth failures: ensure `OSINT_JWT_SECRET` is consistent across services
+- CORS issues: confirm reverse proxy headers and origin configuration
 
-5. Web Interface & API Issues
+## 6) Diagnostics checklist
 
-Static files not loading → Confirm web/static/ and web/templates/ exist.
-CORS problems → CORS is enabled by default.
-Authentication failures → Verify OSINT_JWT_SECRET matches on client/server.
-
-6. General Debugging Tips
-
-Run the full test suite:Bashpip install -e ".[dev]"
+```bash
+pip install -e ".[dev]"
 pytest tests/ -v
-Check Python version (python --version → must be 3.9+).
-Review logs and full stack traces.
-Search existing GitHub Issues before opening a new one.
+python --version
+```
 
-Still Stuck?
+When filing an issue, include:
+- Python version
+- `pip list` output
+- Full error + traceback
+- Steps to reproduce
 
-Open a GitHub Issue with:
-Python version (python --version)
-pip list output
-Exact error message + traceback
-Steps to reproduce
-
-For security-related setup problems: Contact [adaptanalysis@proton.me] privately.
-
-
-File Placement Recommendation:
-osint_blockchain/TROUBLESHOOTING.md
-This guide is accurate based on the current repo structure (pyproject.toml, CLI entry points, data directory layout, Docker setup, etc.). You can copy and paste it directly into the file.
+For security-sensitive issues, report privately via `adaptanalysis@proton.me`.
